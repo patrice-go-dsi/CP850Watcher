@@ -1,4 +1,4 @@
-# CP850 Watcher pour transcodage UTF8 en CP850 (imports SAGE)
+# Script PowerShell pour transcodage automatique de fichiers UTF8 en CP850 (imports SAGE)
 
 ## Description
 
