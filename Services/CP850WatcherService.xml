@@ -1,0 +1,41 @@
+<!-- 
+######################################################################
+# Windows Service Wrapper configuration
+# Pour script PoworShell C:\Scripts\watcher-cp850.ps1
+#
+# Pour installer le service, dans une console PowerShell : 
+# .\CP850WatcherService.exe install
+# Il est en autostart.
+# Sinon :
+# .\CP850WatcherService.exe start
+# Pour l'arrêter, soit via la console services.msc ou bien :
+# .\CP850WatcherService.exe stop
+# Pour désinstaller le service : 
+# .\CP850WatcherService.exe uninstall
+# SI modification du script PS1, il suffit de redémarrer le service :
+# .\CP850WatcherService.exe restart
+###################################################################### -->
+
+<service>
+  <id>CP850WatcherService</id>
+  <name>CP850 Watcher</name>
+  <description>Surveillance d’un dossier local et transfert SFTP automatique via PowerShell</description>
+
+  <executable>powershell.exe</executable>
+  <arguments>-ExecutionPolicy Bypass -File "C:\Scripts\watcher-cp850.ps1"</arguments>
+
+  <priority>Normal</priority>
+  <stoptimeout>15 sec</stoptimeout>
+  <stopparentprocessfirst>true</stopparentprocessfirst>
+  <startmode>Automatic</startmode>
+  <waithint>15 sec</waithint>
+  <sleeptime>1 sec</sleeptime>
+
+  <logpath>C:\Scripts\Logs</logpath>
+  <log mode="roll-by-size">
+    <sizeThreshold>10240</sizeThreshold>
+    <keepFiles>5</keepFiles>
+  </log>
+
+  <onfailure action="restart" delay="10 sec" />
+</service>
